@@ -15,8 +15,7 @@
  */
 
 locals {
-  tags = {
-  }
+  tags = var.tags
 
   postgresqlClusters = (
     var.postgresql_clusters != null

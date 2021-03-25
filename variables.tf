@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
+variable "tags" {
+  type = map(string)
+  default = {}
+  description = "A mapping of tags to assign to all resources."
+}
+
 variable "name" {
   type = string
+  description = "Unique name used as a prefix for all resources to avoid name conflicts within the AWS account."
 }
 
 variable "vpc_id" {
   type = string
+  description = "AWS virtual private cloud id (virtual network id)"
 }
 
 variable "database_subnets" {
   type = list(string)
-}
-
-variable "monitoring_role_arn" {
-  type = string
+  description = "Subnets for databases"
 }
 
 variable "postgresql_clusters" {
