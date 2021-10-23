@@ -50,7 +50,7 @@ module "mysql" {
   for_each = {for item in local.mysqlClusters: item.name => item}
 
   source  = "terraform-aws-modules/rds/aws"
-  version = "2.34.0"
+  version = "3.4.0"
 
   identifier = each.value.name
   username   = each.value.adminUsername
