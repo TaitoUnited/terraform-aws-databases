@@ -57,9 +57,15 @@ module "postgres" {
   password   = random_string.postgres_admin_password[each.key].result
   port       = "5432"
 
+  # parameter_group_name            = each.value.name
+  # parameter_group_use_name_prefix = false
+
+  # TODO: iam_database_authentication_enabled = true
+
   tags = local.tags
 
   engine                = "postgres"
+  family                = each.value.family
   engine_version        = each.value.version
   instance_class        = each.value.instanceClass
   allocated_storage     = each.value.storageSizeGb
@@ -69,8 +75,8 @@ module "postgres" {
 
   # TODO: kms_key_id = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
 
-  maintenance_window = each.value.backupWindow
-  backup_window      = each.value.maintenanceWindow
+  maintenance_window = each.value.maintenanceWindow
+  backup_window      = each.value.backupWindow
 
   vpc_security_group_ids = [aws_security_group.postgres.id]
   subnet_ids             = var.database_subnets
@@ -88,6 +94,7 @@ module "postgres" {
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
   # Enhanced Monitoring
-  monitoring_interval = "30"
+  # TODO: Disabled as this doesn't seem to work
+  monitoring_interval = "0"
   monitoring_role_arn = aws_iam_role.monitoring.arn
 }

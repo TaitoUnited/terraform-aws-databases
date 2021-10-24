@@ -28,8 +28,9 @@ Example YAML:
 ```
 postgresqlClusters:
   - name: my-common-postgres
-    version: "10.6"
-    instanceClass: db.t2.large
+    family: postgres13
+    version: "13.4"
+    instanceClass: db.t4g.small
     storageType: gp2
     storageSizeGb: 10
     maxStorageSizeGb: 100
@@ -40,8 +41,9 @@ postgresqlClusters:
 
 mysqlClusters:
   - name: my-common-mysql
-    version: "5.7.19"
-    instanceClass: db.t2.large
+    family: mysql8
+    version: "8.0.25"
+    instanceClass: db.t4g.small
     storageType: gp2
     storageSizeGb: 10
     maxStorageSizeGb: 100

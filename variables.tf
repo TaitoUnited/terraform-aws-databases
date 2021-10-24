@@ -38,6 +38,7 @@ variable "database_subnets" {
 variable "postgresql_clusters" {
   type = list(object({
     name = string
+    family = string
     version = string
     instanceClass = string
     storageType = string
@@ -55,6 +56,7 @@ variable "postgresql_clusters" {
 variable "mysql_clusters" {
   type = list(object({
     name = string
+    family = string
     version = string
     instanceClass = string
     storageType = string
