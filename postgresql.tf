@@ -96,4 +96,11 @@ module "postgres" {
   # TODO: Disabled as this doesn't seem to work
   monitoring_interval = "0"
   monitoring_role_arn = aws_iam_role.monitoring.arn
+
+  parameters = [
+    {
+      name  = "rds.force_ssl"
+      value = 1
+    }
+  ]  
 }

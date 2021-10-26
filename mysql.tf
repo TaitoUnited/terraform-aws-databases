@@ -99,6 +99,10 @@ module "mysql" {
 
   parameters = [
     {
+      name  = "rds.force_ssl"
+      value = 1
+    },
+    {
       name  = "character_set_client"
       value = "utf8"
     },
