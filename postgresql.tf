@@ -24,9 +24,8 @@ resource "aws_security_group" "postgres" {
     protocol  = "tcp"
 
     cidr_blocks = [
-      "10.10.1.0/24",
-      "10.10.2.0/24",
-      "10.10.3.0/24",
+      for subnet in data.aws_subnet.client_subnets:
+      subnet.cidr_block
     ]
   }
 

@@ -14,6 +14,7 @@ module "databases" {
   name                = "my-infrastructure"
   vpc_id              = module.network.vpc_id
   database_subnets    = module.network.database_subnets
+  client_subnets      = concat(module.network.private_subnets, module.network.public_subnets)
 
   postgresql_clusters = yamldecode(file("${path.root}/../infra.yaml"))["postgresqlClusters"]
   mysql_clusters      = yamldecode(file("${path.root}/../infra.yaml"))["mysqlClusters"]

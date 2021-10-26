@@ -50,3 +50,8 @@ resource "aws_iam_role" "monitoring" {
 }
 EOF
 }
+
+data "aws_subnet" "client_subnets" {
+  for_each = {for id in var.client_subnets: id => id}
+  id = each.key
+}

@@ -35,6 +35,11 @@ variable "database_subnets" {
   description = "Subnets for databases"
 }
 
+variable "client_subnets" {
+  type = list(string)
+  description = "Subnets for database clients"
+}
+
 variable "postgresql_clusters" {
   type = list(object({
     name = string
