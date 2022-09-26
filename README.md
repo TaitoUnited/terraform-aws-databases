@@ -29,8 +29,8 @@ Example YAML:
 ```
 postgresqlClusters:
   - name: my-common-postgres
-    family: postgres13
-    version: "13.4"
+    family: postgres14
+    version: "14.1"
     instanceClass: db.t4g.small
     storageType: gp2
     storageSizeGb: 10
@@ -39,11 +39,12 @@ postgresqlClusters:
     backupWindow: "05:00-07:00"
     maintenanceWindow: "Tue:02:00-Tue:05:00"
     adminUsername: admin
+    iamEnabled: true
 
 mysqlClusters:
   - name: my-common-mysql
     family: mysql8
-    version: "8.0.25"
+    version: "8.0.30"
     instanceClass: db.t4g.small
     storageType: gp2
     storageSizeGb: 10
@@ -52,6 +53,7 @@ mysqlClusters:
     backupWindow: "05:00-07:00"
     maintenanceWindow: "Tue:02:00-Tue:05:00"
     adminUsername: admin
+    iamEnabled: true
 ```
 
 YAML attributes:

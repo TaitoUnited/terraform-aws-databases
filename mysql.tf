@@ -32,6 +32,13 @@ resource "aws_security_group" "mysql" {
   tags = local.tags
 }
 
+resource "aws_db_subnet_group" "mysql" {
+  name       = "mysql"
+  subnet_ids = var.database_subnets
+
+  tags = local.tags
+}
+
 resource "random_string" "mysql_admin_password" {
   for_each = {for item in local.mysqlClusters: item.name => item}
 
@@ -49,7 +56,7 @@ module "mysql" {
   for_each = {for item in local.mysqlClusters: item.name => item}
 
   source  = "terraform-aws-modules/rds/aws"
-  version = "3.4.0"
+  version = "5.1.0"
 
   identifier = each.value.name
   username   = each.value.adminUsername
@@ -59,7 +66,7 @@ module "mysql" {
   # parameter_group_name            = each.value.name
   # parameter_group_use_name_prefix = false
 
-  # TODO: iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = each.value.iamEnabled
 
   tags = local.tags
 
@@ -79,9 +86,7 @@ module "mysql" {
 
   vpc_security_group_ids = [aws_security_group.mysql.id]
   subnet_ids             = var.database_subnets
-
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = each.value.name
+  db_subnet_group_name   = aws_db_subnet_group.mysql.name
 
   # Database Deletion Protection
   deletion_protection = true

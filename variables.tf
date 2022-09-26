@@ -53,6 +53,7 @@ variable "postgresql_clusters" {
     backupWindow = string
     maintenanceWindow = string
     adminUsername = string
+    iamEnabled = bool
   }))
   default = []
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
@@ -71,6 +72,7 @@ variable "mysql_clusters" {
     backupWindow = string
     maintenanceWindow = string
     adminUsername = string
+    iamEnabled = bool
   }))
   default = []
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
